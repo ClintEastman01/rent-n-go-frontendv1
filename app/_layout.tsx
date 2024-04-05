@@ -1,0 +1,47 @@
+import { useEffect, useState } from 'react';
+import '../global.css';
+
+import { Stack } from 'expo-router';
+import AsyncStorage from '@react-native-async-storage/async-storage';
+import { ActivityIndicator } from 'react-native';
+import WelcomeScreen from './welcome';
+
+// export const unstable_settings = {
+//   // Ensure that reloading on `/modal` keeps a back button present.
+//   initialRouteName: '(tabs)',
+// };
+
+export default function RootLayout() {
+  const [hasRunBefore, setHasRunBefore] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const checkHasRunBefore = async () => {
+      try {
+        const hasRun = await AsyncStorage.getItem("hasRunBefore");
+        setHasRunBefore(hasRun === "true"); //NOTE: this is beahutiful, this is not me it's calude i never seen it write like this tho
+      } catch (error) {
+        console.error("Error retrieving hasRunBefore value:", error);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    checkHasRunBefore();
+  }, []);
+
+  if (isLoading) {
+    return <ActivityIndicator size="large" color="#0000ff" />;
+  }
+
+  if (!hasRunBefore) {
+    return <WelcomeScreen setHasRunBefore={setHasRunBefore} />;
+  }
+  return (
+    <Stack>
+      <Stack.Screen name="(pages)" options={{ headerShown: false }} />
+      <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
+      <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+    </Stack>
+  );
+}
