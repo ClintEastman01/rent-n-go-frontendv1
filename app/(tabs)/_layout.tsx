@@ -1,14 +1,14 @@
-import React from "react";
-import FontAwesome from "@expo/vector-icons/FontAwesome";
-import { Link, Tabs } from "expo-router";
-import { Pressable, View } from "react-native";
-import { ClerkProvider, SignedIn, SignedOut } from "@clerk/clerk-expo";
-import SignInWithOAuth from "../components/SignInWithOAuth";
-import * as SecureStore from "expo-secure-store";
+import React from 'react';
+import FontAwesome from '@expo/vector-icons/FontAwesome';
+import { Link, Tabs } from 'expo-router';
+import { Pressable, View } from 'react-native';
+import { ClerkProvider, SignedIn, SignedOut } from '@clerk/clerk-expo';
+import SignInWithOAuth from '../components/SignInWithOAuth';
+import * as SecureStore from 'expo-secure-store';
 
 // You can explore the built-in icon families and icons on the web at https://icons.expo.fyi/
 function TabBarIcon(props: {
-  name: React.ComponentProps<typeof FontAwesome>["name"];
+  name: React.ComponentProps<typeof FontAwesome>['name'];
   color: string;
 }) {
   return <FontAwesome size={28} style={{ marginBottom: -3 }} {...props} />;
@@ -41,17 +41,12 @@ export default function TabLayout() {
       </SignedOut>
 
       <SignedIn>
-        <Tabs
-          screenOptions={{
-          }}
-        >
+        <Tabs screenOptions={{}}>
           <Tabs.Screen
             name="index"
             options={{
-              title: "Tab One",
-              tabBarIcon: ({ color }) => (
-                <TabBarIcon name="code" color={color} />
-              ),
+              title: 'Home Page',
+              tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
               headerRight: () => (
                 <Link href="/modal" asChild>
                   <Pressable>
@@ -68,12 +63,10 @@ export default function TabLayout() {
             }}
           />
           <Tabs.Screen
-            name="two"
+            name="profile"
             options={{
-              title: "Tab Two",
-              tabBarIcon: ({ color }) => (
-                <TabBarIcon name="code" color={color} />
-              ),
+              title: 'Profile',
+              tabBarIcon: ({ color }) => <TabBarIcon name="code" color={color} />,
             }}
           />
         </Tabs>

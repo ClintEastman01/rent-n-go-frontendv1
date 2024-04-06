@@ -10,7 +10,9 @@ const RentOrPartnerScreen = () => {
   const router = useRouter();
   return (
     <View style={styles.container}>
-      <Pressable onPress={() => router.replace('/(tabs)')} style={styles.imageContainer}>
+      <Pressable
+        onPress={() => router.replace('/(pages)/rentersignup')}
+        style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={{

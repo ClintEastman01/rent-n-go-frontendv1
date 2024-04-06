@@ -3,13 +3,30 @@ import { Text, View } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
+import { useAuth } from '@clerk/clerk-expo';
 
 export default function TabOneScreen() {
+  const { getToken } = useAuth();
+  const [token, setToken] = useState('');
+  useEffect(() => {
+    const fetchToken = async () => {
+      const fetchedToken = await getToken({ template: 'oneWeek' });
+      setToken(fetchedToken!);
+    };
+    fetchToken();
+  }, []);
+
   const [data, setData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://2d3c-68-193-89-107.ngrok-free.app');
+        const response = await fetch('https://df75-68-193-89-107.ngrok-free.app/data/cars', {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
         const jsonData = await response.json();
         setData(jsonData);
       } catch (error) {
@@ -18,7 +35,7 @@ export default function TabOneScreen() {
     };
 
     fetchData();
-  }, []);
+  }, [token]);
 
   const handleClearStorage = async () => {
     try {
@@ -31,7 +48,7 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Data: {JSON.stringify(data)}</Text>
+      <Text>Show cars: {JSON.stringify(data)}</Text>
       <Text style={styles.title}>Tab One</Text>
       <Link href="/(pages)/cars">Car List</Link>
       <Button title="Clear AsyncStorage" onPress={handleClearStorage} />
