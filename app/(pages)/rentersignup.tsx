@@ -1,11 +1,12 @@
 import React from 'react';
-import { Text, View, TextInput, Switch, Button, ScrollView } from 'react-native';
+import { Text, View, TextInput } from 'react-native';
 import SignInWithOAuth from '../components/SignInWithOAuth';
 import { SignedIn, SignedOut, useAuth } from '@clerk/clerk-expo';
 import { useForm, Controller } from 'react-hook-form';
 import { iCreatedPersonResponse, iPerson } from '../components/interfaces';
 import { useRouter } from 'expo-router';
 import { CustomButton } from '../../components/Button';
+
 const rentersignup = () => {
   const { getToken } = useAuth();
   const router = useRouter();
@@ -40,7 +41,7 @@ const rentersignup = () => {
     console.log(data);
     try {
       const fetchedToken = await getToken({ template: 'oneWeek' });
-      const r = await fetch('https://df75-68-193-89-107.ngrok-free.app/data/create/person', {
+      const r = await fetch('https://1d42-68-193-89-107.ngrok-free.app/data/create/person', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${fetchedToken}`,
@@ -59,25 +60,30 @@ const rentersignup = () => {
   };
 
   return (
-    <View className="flex-1 justify-center items-center ">
-      <SignedOut >
+    <View className="flex-1 items-center justify-center ">
+      <SignedOut>
         <SignInWithOAuth />
       </SignedOut>
       <SignedIn>
-        <View className="flex-1 w-full gap-8 h-full justify-center items-center  bg-myTheme-lightbg pb-20">
-          <View className='w-full flex justify-start items-center'>
-            <Text className='text-3xl pb-6 text-center font-bold text-myTheme-darktext'>Create New Account</Text>
+        <View className="h-full w-full flex-1 items-center justify-center gap-8  bg-myTheme-lightbg pb-20">
+          <View className="flex w-full items-center justify-start">
+            <Text className="pb-6 text-center text-3xl font-bold text-myTheme-darktext">
+              Create New Renter Account
+            </Text>
           </View>
-          <View className='w-full flex flex-row px-4 gap-2 '>
-            <View className='w-1/2'>
+          <View className="flex w-full flex-row gap-2 px-4 ">
+            <View className="w-1/2">
               <Controller
                 control={control}
                 name="first_name"
                 rules={{ required: true }}
                 render={({ field: { onChange, value } }) => (
-                  <View className='w-full '>
-                    <TextInput placeholder="First Name" value={value} onChangeText={onChange}
-                      className='flex w-full h-[50] border-gray-200 shadow-sm border-b-2 rounded-xl bg-white p-2 text-myTheme-darktext'
+                  <View className="w-full ">
+                    <TextInput
+                      placeholder="First Name"
+                      value={value}
+                      onChangeText={onChange}
+                      className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white p-2 text-myTheme-darktext shadow-sm"
                     />
                     {errors.first_name && (
                       <Text style={{ color: 'red' }}>{errors.last_name?.message}</Text>
@@ -86,15 +92,19 @@ const rentersignup = () => {
                 )}
               />
             </View>
-            <View className='flex-1'>
+            <View className="flex-1">
               <Controller
                 control={control}
                 name="last_name"
                 rules={{ required: true }}
                 render={({ field: { onChange, value } }) => (
-                  <View className='w-full'>
-                    <TextInput placeholder="Last Name" value={value} onChangeText={onChange}
-                      className='flex w-full h-[50] border-gray-200 shadow-sm border-b-2 rounded-xl  bg-white p-2 text-myTheme-darktext' />
+                  <View className="w-full">
+                    <TextInput
+                      placeholder="Last Name"
+                      value={value}
+                      onChangeText={onChange}
+                      className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white  p-2 text-myTheme-darktext shadow-sm"
+                    />
                     {errors.last_name && (
                       <Text style={{ color: 'red' }}>{errors.last_name.message}</Text>
                     )}
@@ -102,17 +112,20 @@ const rentersignup = () => {
                 )}
               />
             </View>
-
           </View>
-          <View className='w-full flex gap-8'>
+          <View className="flex w-full gap-8">
             <Controller
               control={control}
               name="email"
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
-                <View className='w-full px-4'>
-                  <TextInput placeholder="Email" value={value} onChangeText={onChange}
-                    className='flex w-full h-[50] rounded-xl border-gray-200 shadow-sm border-b-2 bg-white p-2 text-myTheme-darktext' />
+                <View className="w-full px-4">
+                  <TextInput
+                    placeholder="Email"
+                    value={value}
+                    onChangeText={onChange}
+                    className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white p-2 text-myTheme-darktext shadow-sm"
+                  />
                   {errors.email && <Text style={{ color: 'red' }}>{errors.email.message}</Text>}
                 </View>
               )}
@@ -122,9 +135,13 @@ const rentersignup = () => {
               name="address"
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
-                <View className='w-full px-4'>
-                  <TextInput placeholder="Address" value={value} onChangeText={onChange}
-                    className='flex w-full h-[50] border-gray-200 shadow-sm border-b-2 rounded-xl bg-white p-2 text-myTheme-darktext' />
+                <View className="w-full px-4">
+                  <TextInput
+                    placeholder="Address"
+                    value={value}
+                    onChangeText={onChange}
+                    className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white p-2 text-myTheme-darktext shadow-sm"
+                  />
                   {errors.address && <Text style={{ color: 'red' }}>{errors.address.message}</Text>}
                 </View>
               )}
@@ -134,15 +151,22 @@ const rentersignup = () => {
               name="phone"
               rules={{ required: true }}
               render={({ field: { onChange, value } }) => (
-                <View className='w-full px-4'>
-                  <TextInput placeholder="Phone" border-gray-200 shadow-sm border-b-2 value={value} onChangeText={onChange}
-                    className='flex w-full h-[50] border-gray-200 shadow-sm border-b-2 rounded-xl bg-white p-2 text-myTheme-darktext' />
+                <View className="w-full px-4">
+                  <TextInput
+                    placeholder="Phone"
+                    border-gray-200
+                    shadow-sm
+                    border-b-2
+                    value={value}
+                    onChangeText={onChange}
+                    className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white p-2 text-myTheme-darktext shadow-sm"
+                  />
                   {errors.phone && <Text style={{ color: 'red' }}>{errors.phone.message}</Text>}
                 </View>
               )}
             />
           </View>
-          <View className='w-full px-4'>
+          <View className="w-full px-4">
             <CustomButton title="Submit" onPress={handleSubmit(onSubmit)} />
           </View>
         </View>

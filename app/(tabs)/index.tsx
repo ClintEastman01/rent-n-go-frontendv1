@@ -20,7 +20,7 @@ export default function TabOneScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://df75-68-193-89-107.ngrok-free.app/data/cars', {
+        const response = await fetch('https://1d42-68-193-89-107.ngrok-free.app/data/cars', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
@@ -48,8 +48,7 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      <Text>Show cars: {JSON.stringify(data)}</Text>
-      <Text style={styles.title}>Tab One</Text>
+      {/* <Text>Show cars: {JSON.stringify(data)}</Text> */}
       <Link href="/(pages)/cars">Car List</Link>
       <Button title="Clear AsyncStorage" onPress={handleClearStorage} />
       <Stack>

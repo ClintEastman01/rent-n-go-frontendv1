@@ -24,7 +24,9 @@ const RentOrPartnerScreen = () => {
         />
         <Text style={styles.text}>RENT</Text>
       </Pressable>
-      <Pressable onPress={() => router.replace('/(tabs)')} style={styles.imageContainer}>
+      <Pressable
+        onPress={() => router.replace('/(pages)/partnersignup')}
+        style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={{
