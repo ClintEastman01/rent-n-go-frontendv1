@@ -5,7 +5,7 @@ import { SignedIn, SignedOut, useAuth } from '@clerk/clerk-expo';
 import { useForm, Controller } from 'react-hook-form';
 import { iCreatedPersonResponse, iPerson } from '../components/interfaces';
 import { useRouter } from 'expo-router';
-
+import { CustomButton } from '../../components/Button';
 const rentersignup = () => {
   const { getToken } = useAuth();
   const router = useRouter();
@@ -59,86 +59,95 @@ const rentersignup = () => {
   };
 
   return (
-    <>
-      <SignedOut>
+    <View className="flex-1 justify-center items-center ">
+      <SignedOut >
         <SignInWithOAuth />
       </SignedOut>
       <SignedIn>
-        <View>
-          <Controller
-            control={control}
-            name="first_name"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <View>
-                <TextInput placeholder="First Name" value={value} onChangeText={onChange} />
-                {errors.first_name && (
-                  <Text style={{ color: 'red' }}>{errors.first_name.message}</Text>
+        <View className="flex-1 w-full gap-8 h-full justify-center items-center  bg-myTheme-lightbg pb-20">
+          <View className='w-full flex justify-start items-center'>
+            <Text className='text-3xl pb-6 text-center font-bold text-myTheme-darktext'>Create New Account</Text>
+          </View>
+          <View className='w-full flex flex-row px-4 gap-2 '>
+            <View className='w-1/2'>
+              <Controller
+                control={control}
+                name="first_name"
+                rules={{ required: true }}
+                render={({ field: { onChange, value } }) => (
+                  <View className='w-full '>
+                    <TextInput placeholder="First Name" value={value} onChangeText={onChange}
+                      className='flex w-full h-[50] border-gray-200 shadow-sm border-b-2 rounded-xl bg-white p-2 text-myTheme-darktext'
+                    />
+                    {errors.first_name && (
+                      <Text style={{ color: 'red' }}>{errors.last_name?.message}</Text>
+                    )}
+                  </View>
                 )}
-              </View>
-            )}
-          />
-          <Controller
-            control={control}
-            name="last_name"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <View>
-                <TextInput placeholder="Last Name" value={value} onChangeText={onChange} />
-                {errors.last_name && (
-                  <Text style={{ color: 'red' }}>{errors.last_name.message}</Text>
+              />
+            </View>
+            <View className='flex-1'>
+              <Controller
+                control={control}
+                name="last_name"
+                rules={{ required: true }}
+                render={({ field: { onChange, value } }) => (
+                  <View className='w-full'>
+                    <TextInput placeholder="Last Name" value={value} onChangeText={onChange}
+                      className='flex w-full h-[50] border-gray-200 shadow-sm border-b-2 rounded-xl  bg-white p-2 text-myTheme-darktext' />
+                    {errors.last_name && (
+                      <Text style={{ color: 'red' }}>{errors.last_name.message}</Text>
+                    )}
+                  </View>
                 )}
-              </View>
-            )}
-          />
-          <Controller
-            control={control}
-            name="email"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <View>
-                <TextInput placeholder="Email" value={value} onChangeText={onChange} />
-                {errors.email && <Text style={{ color: 'red' }}>{errors.email.message}</Text>}
-              </View>
-            )}
-          />
-          <Controller
-            control={control}
-            name="address"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <View>
-                <TextInput placeholder="Address" value={value} onChangeText={onChange} />
-                {errors.address && <Text style={{ color: 'red' }}>{errors.address.message}</Text>}
-              </View>
-            )}
-          />
-          <Controller
-            control={control}
-            name="phone"
-            rules={{ required: true }}
-            render={({ field: { onChange, value } }) => (
-              <View>
-                <TextInput placeholder="Phone" value={value} onChangeText={onChange} />
-                {errors.phone && <Text style={{ color: 'red' }}>{errors.phone.message}</Text>}
-              </View>
-            )}
-          />
-          <Controller
-            control={control}
-            name="is_partner"
-            render={({ field: { value, onChange } }) => (
-              <View style={{ flexDirection: 'row', alignItems: 'center' }}>
-                <Switch value={value} onValueChange={onChange} />
-                <Text>Is Partner</Text>
-              </View>
-            )}
-          />
-          {/* Add functionality for photos_of_docs */}
-          <Button title="Submit" onPress={handleSubmit(onSubmit)} />
+              />
+            </View>
+
+          </View>
+          <View className='w-full flex gap-8'>
+            <Controller
+              control={control}
+              name="email"
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <View className='w-full px-4'>
+                  <TextInput placeholder="Email" value={value} onChangeText={onChange}
+                    className='flex w-full h-[50] rounded-xl border-gray-200 shadow-sm border-b-2 bg-white p-2 text-myTheme-darktext' />
+                  {errors.email && <Text style={{ color: 'red' }}>{errors.email.message}</Text>}
+                </View>
+              )}
+            />
+            <Controller
+              control={control}
+              name="address"
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <View className='w-full px-4'>
+                  <TextInput placeholder="Address" value={value} onChangeText={onChange}
+                    className='flex w-full h-[50] border-gray-200 shadow-sm border-b-2 rounded-xl bg-white p-2 text-myTheme-darktext' />
+                  {errors.address && <Text style={{ color: 'red' }}>{errors.address.message}</Text>}
+                </View>
+              )}
+            />
+            <Controller
+              control={control}
+              name="phone"
+              rules={{ required: true }}
+              render={({ field: { onChange, value } }) => (
+                <View className='w-full px-4'>
+                  <TextInput placeholder="Phone" border-gray-200 shadow-sm border-b-2 value={value} onChangeText={onChange}
+                    className='flex w-full h-[50] border-gray-200 shadow-sm border-b-2 rounded-xl bg-white p-2 text-myTheme-darktext' />
+                  {errors.phone && <Text style={{ color: 'red' }}>{errors.phone.message}</Text>}
+                </View>
+              )}
+            />
+          </View>
+          <View className='w-full px-4'>
+            <CustomButton title="Submit" onPress={handleSubmit(onSubmit)} />
+          </View>
         </View>
       </SignedIn>
-    </>
+    </View>
   );
 };
 
