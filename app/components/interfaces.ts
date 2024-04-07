@@ -12,3 +12,8 @@ export interface iVehicle {
   type: string;
   userId: number;
 }
+
+export interface iCreatedPersonResponse {
+  status: number;
+  error: string;
+}

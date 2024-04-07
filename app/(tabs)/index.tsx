@@ -7,6 +7,7 @@ import { useAuth } from '@clerk/clerk-expo';
 
 export default function TabOneScreen() {
   const { getToken } = useAuth();
+  const [data, setData] = useState(null);
   const [token, setToken] = useState('');
   useEffect(() => {
     const fetchToken = async () => {
@@ -16,7 +17,6 @@ export default function TabOneScreen() {
     fetchToken();
   }, []);
 
-  const [data, setData] = useState(null);
   useEffect(() => {
     const fetchData = async () => {
       try {
