@@ -59,19 +59,25 @@ const rentersignup = () => {
   };
 
   return (
-    <>
+    <View className="flex-1 justify-center items-center">
       <SignedOut>
         <SignInWithOAuth />
       </SignedOut>
       <SignedIn>
-        <View>
+        <View className="flex-1 items-center bg-myTheme-lightbg pt-20">
+          <View >
+            <Text className='text-3xl text-center font-extrabold text-myTheme-darktext'>Create New Account</Text>
+          </View>
           <Controller
+            className='w-full px-4'
             control={control}
             name="first_name"
             rules={{ required: true }}
             render={({ field: { onChange, value } }) => (
-              <View>
-                <TextInput placeholder="First Name" value={value} onChangeText={onChange} />
+              <View className='w-full px-4'>
+                <TextInput placeholder="First Name" value={value} onChangeText={onChange}
+                  className='flex w-full bg-myTheme-lightbg border-2 border-myTheme-darktext rounded-lg'
+                />
                 {errors.first_name && (
                   <Text style={{ color: 'red' }}>{errors.first_name.message}</Text>
                 )}
@@ -138,7 +144,7 @@ const rentersignup = () => {
           <Button title="Submit" onPress={handleSubmit(onSubmit)} />
         </View>
       </SignedIn>
-    </>
+    </View>
   );
 };
 
