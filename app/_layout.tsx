@@ -61,6 +61,7 @@ export default function RootLayout() {
     <ClerkProvider tokenCache={tokenCache} publishableKey={clerk_key!}>
       <Stack screenOptions={{ headerShown: false }}>
         <Stack.Screen name="(signup)" options={{ headerShown: false }} />
+        {/* <Stack.Screen name="(tabs)" options={{ headerShown: false }} /> */}
       </Stack>
     </ClerkProvider>
   );
