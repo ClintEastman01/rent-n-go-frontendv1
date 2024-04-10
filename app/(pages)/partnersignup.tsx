@@ -26,22 +26,13 @@ const partnersignup = () => {
       photos_of_docs: [],
     },
     mode: 'onBlur',
-    resolver: async (values) => {
-      const errors: { [key: string]: string } = {};
-      if (!values.first_name) errors.first_name = 'First name is required';
-      if (!values.last_name) errors.last_name = 'Last name is required';
-      if (!values.email) errors.email = 'Email is required';
-      if (!values.address) errors.address = 'Address is required';
-      if (!values.phone) errors.phone = 'Phone is required';
-      return { values, errors };
-    },
   });
 
   const onSubmit = async (data: iPerson) => {
     console.log(data);
     try {
       const fetchedToken = await getToken({ template: 'oneWeek' });
-      const r = await fetch('https://1d42-68-193-89-107.ngrok-free.app/data/create/person', {
+      const r = await fetch('https://e6e8-68-193-89-107.ngrok-free.app/data/create/person', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${fetchedToken}`,
@@ -86,7 +77,7 @@ const partnersignup = () => {
                       className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white p-2 text-myTheme-darktext shadow-sm"
                     />
                     {errors.first_name && (
-                      <Text style={{ color: 'red' }}>{errors.last_name?.message}</Text>
+                      <Text style={{ color: 'red' }}>First Name is required</Text>
                     )}
                   </View>
                 )}
@@ -106,7 +97,7 @@ const partnersignup = () => {
                       className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white  p-2 text-myTheme-darktext shadow-sm"
                     />
                     {errors.last_name && (
-                      <Text style={{ color: 'red' }}>{errors.last_name.message}</Text>
+                      <Text style={{ color: 'red' }}>Last Name is required</Text>
                     )}
                   </View>
                 )}
@@ -142,7 +133,7 @@ const partnersignup = () => {
                     onChangeText={onChange}
                     className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white p-2 text-myTheme-darktext shadow-sm"
                   />
-                  {errors.address && <Text style={{ color: 'red' }}>{errors.address.message}</Text>}
+                  {errors.address && <Text style={{ color: 'red' }}>Address is required</Text>}
                 </View>
               )}
             />
@@ -161,7 +152,7 @@ const partnersignup = () => {
                     onChangeText={onChange}
                     className="flex h-[50] w-full rounded-xl border-b-2 border-gray-200 bg-white p-2 text-myTheme-darktext shadow-sm"
                   />
-                  {errors.phone && <Text style={{ color: 'red' }}>{errors.phone.message}</Text>}
+                  {errors.phone && <Text style={{ color: 'red' }}>Phone Number is required</Text>}
                 </View>
               )}
             />
