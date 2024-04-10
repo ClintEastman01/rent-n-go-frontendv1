@@ -5,6 +5,7 @@ import { SignedIn, SignedOut, useAuth } from '@clerk/clerk-expo';
 import { useForm, Controller } from 'react-hook-form';
 import { iCreatedPersonResponse, iPerson } from '../components/interfaces';
 import { useRouter } from 'expo-router';
+import { api_url } from '../components/serverUrl';
 import { CustomButton } from '../../components/Button';
 
 const rentersignup = () => {
@@ -17,11 +18,11 @@ const rentersignup = () => {
     formState: { errors },
   } = useForm<iPerson>({
     defaultValues: {
-      first_name: '',
-      last_name: '',
-      email: '',
-      address: '',
-      phone: '',
+      first_name: 'John',
+      last_name: 'Doe',
+      email: 'smh@gmail.com',
+      address: '2345@gmail.com',
+      phone: '6789456123',
       is_partner: false,
       photos_of_docs: [],
     },
@@ -30,9 +31,10 @@ const rentersignup = () => {
 
   const onSubmit = async (data: iPerson) => {
     console.log(data);
+    const apiUrl = api_url;
     try {
       const fetchedToken = await getToken({ template: 'oneWeek' });
-      const r = await fetch('https://e6e8-68-193-89-107.ngrok-free.app/data/create/person', {
+      const r = await fetch(apiUrl + 'data/create/person', {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${fetchedToken}`,

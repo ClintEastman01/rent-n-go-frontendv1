@@ -4,8 +4,10 @@ import { Link, Stack } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
 import { useAuth } from '@clerk/clerk-expo';
+import { api_url } from '../components/serverUrl';
 
 export default function TabOneScreen() {
+  const apiUrl = api_url;
   const { getToken } = useAuth();
   const [data, setData] = useState(null);
   const [token, setToken] = useState('');
@@ -20,7 +22,7 @@ export default function TabOneScreen() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const response = await fetch('https://1d42-68-193-89-107.ngrok-free.app/data/cars', {
+        const response = await fetch(apiUrl + 'data/cars', {
           headers: {
             Authorization: `Bearer ${token}`,
             'Content-Type': 'application/json',
