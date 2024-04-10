@@ -6,16 +6,16 @@ import AsyncStorage from '@react-native-async-storage/async-storage';
 import { ActivityIndicator } from 'react-native';
 import WelcomeScreen from './welcome';
 import { ClerkProvider } from '@clerk/clerk-expo';
+import RentOrPartnerSelection from './RentOrPartnerSelection';
 
 export default function RootLayout() {
   const [hasRunBefore, setHasRunBefore] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-
   useEffect(() => {
     const checkHasRunBefore = async () => {
       try {
         const hasRun = await AsyncStorage.getItem('hasRunBefore');
-        setHasRunBefore(hasRun === 'true'); //NOTE: this is beahutiful, this is not me it's calude i never seen it write like this tho
+        setHasRunBefore(hasRun === 'true');
       } catch (error) {
         console.error('Error retrieving hasRunBefore value:', error);
       } finally {
@@ -33,6 +33,11 @@ export default function RootLayout() {
   if (!hasRunBefore) {
     return <WelcomeScreen setHasRunBefore={setHasRunBefore} />;
   }
+
+  // if (!signedUp) {
+  //   return <RentOrPartnerSelection />;
+  // }
+
   const tokenCache = {
     async getToken(key: string) {
       try {
@@ -51,12 +56,11 @@ export default function RootLayout() {
   };
 
   const clerk_key = process.env.EXPO_PUBLIC_CLERK_PUBLISHABLE_KEY;
+
   return (
     <ClerkProvider tokenCache={tokenCache} publishableKey={clerk_key!}>
-      <Stack>
-        <Stack.Screen name="(pages)" options={{ headerShown: false }} />
-        <Stack.Screen name="(tabs)" options={{ headerShown: false }} />
-        <Stack.Screen name="modal" options={{ presentation: 'modal' }} />
+      <Stack screenOptions={{ headerShown: false }}>
+        <Stack.Screen name="(signup)" options={{ headerShown: false }} />
       </Stack>
     </ClerkProvider>
   );

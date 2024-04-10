@@ -3,7 +3,7 @@ import { Text, View } from 'react-native';
 import { Link, Stack } from 'expo-router';
 import AsyncStorage from '@react-native-async-storage/async-storage';
 import { useEffect, useState } from 'react';
-import { useAuth } from '@clerk/clerk-expo';
+import { useAuth, useUser } from '@clerk/clerk-expo';
 import { api_url } from '../components/serverUrl';
 
 export default function TabOneScreen() {
@@ -11,6 +11,7 @@ export default function TabOneScreen() {
   const { getToken } = useAuth();
   const [data, setData] = useState(null);
   const [token, setToken] = useState('');
+  const user = useUser();
   useEffect(() => {
     const fetchToken = async () => {
       const fetchedToken = await getToken({ template: 'oneWeek' });
@@ -50,8 +51,8 @@ export default function TabOneScreen() {
 
   return (
     <View style={styles.container}>
-      {/* <Text>Show cars: {JSON.stringify(data)}</Text> */}
-      <Link href="/(pages)/cars">Car List</Link>
+      {/* <Text>Show cars: {JSON.stringify(user)}</Text> */}
+      <Link href="/">Car List</Link>
       <Button title="Clear AsyncStorage" onPress={handleClearStorage} />
       <Stack>
         <Stack.Screen name="car" />

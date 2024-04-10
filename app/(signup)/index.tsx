@@ -6,13 +6,11 @@ import { useRouter } from 'expo-router';
 const blurhash =
   '|rF?hV%2WCj[ayj[a|j[az_NaeWBj@ayfRayfQfQM{M|azj[azf6fQfQfQIpWXofj[ayj[j[fQayWCoeoeaya}j[ayfQa{oLj?j[WVj[ayayj[fQoff7azayj[ayj[j[ayofayayayj[fQj[ayayj[ayfjj[j[ayjuayj[';
 
-const RentOrPartnerScreen = () => {
+const RentOrPartnerSelection = () => {
   const router = useRouter();
   return (
     <View style={styles.container}>
-      <Pressable
-        onPress={() => router.replace('/(pages)/rentersignup')}
-        style={styles.imageContainer}>
+      <Pressable onPress={() => router.push('/rentersignup')} style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={{
@@ -24,9 +22,7 @@ const RentOrPartnerScreen = () => {
         />
         <Text style={styles.text}>RENT</Text>
       </Pressable>
-      <Pressable
-        onPress={() => router.replace('/(pages)/partnersignup')}
-        style={styles.imageContainer}>
+      <Pressable onPress={() => router.push('/partnersignup')} style={styles.imageContainer}>
         <Image
           style={styles.image}
           source={{
@@ -42,7 +38,7 @@ const RentOrPartnerScreen = () => {
   );
 };
 
-export default RentOrPartnerScreen;
+export default RentOrPartnerSelection;
 
 const styles = StyleSheet.create({
   text: {

@@ -3,12 +3,12 @@ import { Text, View, TextInput } from 'react-native';
 import SignInWithOAuth from '../components/SignInWithOAuth';
 import { SignedIn, SignedOut, useAuth } from '@clerk/clerk-expo';
 import { useForm, Controller } from 'react-hook-form';
-import { iCreatedPersonResponse, iPerson } from '../components/interfaces';
-import { api_url } from '../components/serverUrl';
+import { iCreatedPersonResponse, iPerson } from 'app/components/interfaces';
 import { useRouter } from 'expo-router';
-import { CustomButton } from '../../components/Button';
+import { api_url } from 'app/components/serverUrl';
+import { CustomButton } from 'components/Button';
 
-const partnersignup = () => {
+const rentersignup = () => {
   const { getToken } = useAuth();
   const router = useRouter();
 
@@ -18,12 +18,12 @@ const partnersignup = () => {
     formState: { errors },
   } = useForm<iPerson>({
     defaultValues: {
-      first_name: 'Jane',
-      last_name: 'Appleseed',
-      email: 'jHxuK@example.com',
-      address: '10 Appleseed St',
-      phone: '333-333-3333',
-      is_partner: true,
+      first_name: 'John',
+      last_name: 'Doe',
+      email: 'smh@gmail.com',
+      address: '2345@gmail.com',
+      phone: '6789456123',
+      is_partner: false,
       photos_of_docs: [],
     },
     mode: 'onBlur',
@@ -43,9 +43,6 @@ const partnersignup = () => {
         body: JSON.stringify(data),
       });
       const res = (await r.json()) as unknown as iCreatedPersonResponse;
-      if (res.status !== 201) {
-        console.log(res.error);
-      }
       router.replace('/(tabs)');
     } catch (error) {
       console.error('Error fetching data:', error);
@@ -61,7 +58,7 @@ const partnersignup = () => {
         <View className="h-full w-full flex-1 items-center justify-center gap-8  bg-myTheme-lightbg pb-20">
           <View className="flex w-full items-center justify-start">
             <Text className="pb-6 text-center text-3xl font-bold text-myTheme-darktext">
-              Create New Partner Account
+              Create New Renter Account
             </Text>
           </View>
           <View className="flex w-full flex-row gap-2 px-4 ">
@@ -168,4 +165,4 @@ const partnersignup = () => {
   );
 };
 
-export default partnersignup;
+export default rentersignup;

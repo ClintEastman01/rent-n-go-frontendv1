@@ -29,18 +29,9 @@ const SignInWithOAuth = () => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <View className="flex-1 items-center justify-center">
       <Button title="Sign in with Google" onPress={onPress} />
     </View>
   );
 };
 export default SignInWithOAuth;
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
-  },
-});
